@@ -34,6 +34,11 @@
             "date": 1707412627177,
             "name": "/Users/mdyousufsheikh/Documents/Projects/PL2/booksCollectionServer/logs/winston/successes/books-2024-08-02-23-success.log",
             "hash": "ef560a6ac81d531daa35a9e3263153c03c08852c700afed6f4a53d1a2aa350c6"
+        },
+        {
+            "date": 1707415207653,
+            "name": "/Users/mdyousufsheikh/Documents/Projects/PL2/booksCollectionServer/logs/winston/successes/books-2024-09-02-00-success.log",
+            "hash": "ad2e654d27b14202ab062691acf7176705b5bf3c9eba621a6cee139d8a4e48d9"
         }
     ],
     "hashType": "sha256"
