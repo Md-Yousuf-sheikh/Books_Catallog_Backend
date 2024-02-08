@@ -26,7 +26,6 @@ const loginUserWithDB = catchAsync(async (req: Request, res: Response) => {
 });
 
 //  Users
-
 const getUsersFormDB = catchAsync(async (req: Request, res: Response) => {
   const result = await UserService.getUsersFormDB();
   sendResponse(res, {
@@ -36,9 +35,55 @@ const getUsersFormDB = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const getUserByIdFormDB = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.getUserByIdFormDB(req?.params?.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get user successfully!',
+    data: result,
+  });
+});
+const updateUserByIdFormDB = catchAsync(async (req: Request, res: Response) => {
+  const id = req?.params?.id;
+  const payload = req?.body;
 
+  const result = await UserService.updateUserByIdFormDB(id, payload);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Update user successfully!',
+    data: result,
+  });
+});
+const deleteUserByIdFormDB = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.deleteUserByIdFormDB(req?.params?.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Delete user successfully!',
+    data: result,
+  });
+});
+
+// profile
+const getProfileFormDB = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.getProfileFormDB(req?.params?.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get profile successfully!',
+    data: result,
+  });
+});
+
+//  export
 export const UserController = {
   createUserIntoDB,
   loginUserWithDB,
-  getUsersFormDB
+  getUsersFormDB,
+  getUserByIdFormDB,
+  deleteUserByIdFormDB,
+  updateUserByIdFormDB,
+  getProfileFormDB
 };

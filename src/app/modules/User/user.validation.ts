@@ -42,7 +42,26 @@ const loginUser = z.object({
   }),
 });
 
+const updateUser = z.object({
+  body: z.object({
+    name: z.optional(z.string()),
+    contactNo: z.optional(z.string()),
+    address: z.optional(z.string()),
+    profileImg: z.optional(z.string()),
+  }),
+});
+
+const paramsId = z.object({
+  params: z.object({
+    id: z.string({
+      required_error: 'UserId is required in params',
+    }),
+  }),
+});
+
 export const userValidation = {
   loginUser,
   registerUser,
+  updateUser,
+  paramsId,
 };

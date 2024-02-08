@@ -81,7 +81,7 @@ const loginUserWithDB = async (props: User) => {
 const getUsersFormDB = async () => {
   const res = await prisma.user.findMany({
     where: {
-      role: 'CUSTOMER'
+      role: 'customer'
     },
     select: UserSelect,
   });

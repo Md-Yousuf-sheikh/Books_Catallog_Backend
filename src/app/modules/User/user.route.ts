@@ -21,26 +21,22 @@ authRoute.post(
 userRoute.get('', UserController.getUsersFormDB);
 userRoute.get(
   '/:id',
-  validateRequest(userValidation.loginUser),
-  UserController.loginUserWithDB
+  validateRequest(userValidation.paramsId),
+  UserController.getUserByIdFormDB
 );
 userRoute.patch(
   '/:id',
-  validateRequest(userValidation.loginUser),
-  UserController.loginUserWithDB
+  validateRequest(userValidation.paramsId),
+  UserController.updateUserByIdFormDB
 );
 userRoute.delete(
   '/:id',
-  validateRequest(userValidation.loginUser),
-  UserController.loginUserWithDB
+  validateRequest(userValidation.paramsId),
+  UserController.deleteUserByIdFormDB
 );
 
 //  profile
-profileRoute.get(
-  '/',
-  validateRequest(userValidation.loginUser),
-  UserController.loginUserWithDB
-);
+profileRoute.get('/:id', UserController.getProfileFormDB);
 
 export const UserRoutes = {
   authRoute,

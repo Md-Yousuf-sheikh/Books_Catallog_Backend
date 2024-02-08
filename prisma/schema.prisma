@@ -12,15 +12,15 @@ datasource db {
 
 // Define Role Enum
 enum UserRole {
-  CUSTOMER
-  ADMIN
+  customer
+  admin
 }
 
 // Define OrderStatus Enum
 enum OrderStatus {
-  SUCCESS
-  PENDING
-  CANCEL
+  success
+  pending
+  cancle
 }
 
 model User {
@@ -28,7 +28,7 @@ model User {
   name       String?
   email      String   @unique
   password   String
-  role       UserRole @default(CUSTOMER)
+  role       UserRole @default(customer)
   contactNo  String
   address    String
   profileImg String
@@ -82,7 +82,7 @@ model Order {
   userId       String      @db.Uuid
   user         User        @relation(fields: [userId], references: [id])
   orderedBooks Json[]
-  status       OrderStatus @default(PENDING)
+  status       OrderStatus @default(pending)
 
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt @db.Timestamp(6)
