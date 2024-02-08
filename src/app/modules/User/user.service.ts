@@ -57,17 +57,17 @@ const loginUserWithDB = async (props: User) => {
   }
 
   //  email and roll
-  const { email, role } = responseWithoutPassword;
+  const { role, id } = responseWithoutPassword;
 
   //  create access and refresh tokens
   const accessToken = jwtHelpers.createToken(
-    { email, role },
+    { id, role },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
   // refresh Token
   const refreshToken = jwtHelpers.createToken(
-    { email, role },
+    { id, role },
     config.jwt.refresh_secret as Secret,
     config.jwt.refresh_expires_in as string
   );
@@ -81,7 +81,7 @@ const loginUserWithDB = async (props: User) => {
 const getUsersFormDB = async () => {
   const res = await prisma.user.findMany({
     where: {
-      role: 'customer'
+      role: 'customer',
     },
     select: UserSelect,
   });
@@ -89,6 +89,16 @@ const getUsersFormDB = async () => {
   return res;
 };
 const getUserByIdFormDB = async (id: string) => {
+  const isUserExist = await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!");
+  }
+  // res
   const res = await prisma.user.findUnique({
     where: {
       id: id,
@@ -99,6 +109,17 @@ const getUserByIdFormDB = async (id: string) => {
   return res;
 };
 const deleteUserByIdFormDB = async (id: string) => {
+  const isUserExist = await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!");
+  }
+
+  // res
   const res = await prisma.user.delete({
     where: {
       id: id,
@@ -111,11 +132,23 @@ const updateUserByIdFormDB = async (
   id: string,
   payload: Partial<User>
 ): Promise<Partial<User>> => {
+  const isUserExist = await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!");
+  }
+
+  // res
   const res = await prisma.user.update({
     where: { id },
     data: payload,
     select: UserSelect,
   });
+
   return res;
 };
 // profile
@@ -126,7 +159,9 @@ const getProfileFormDB = async (id: string) => {
     },
     select: UserSelect,
   });
-
+  if (!res) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User profile doesn't exist!");
+  }
   return res;
 };
 
@@ -137,5 +172,5 @@ export const UserService = {
   deleteUserByIdFormDB,
   updateUserByIdFormDB,
   getProfileFormDB,
-  getUsersFormDB
+  getUsersFormDB,
 };

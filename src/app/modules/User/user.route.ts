@@ -1,4 +1,6 @@
 import express from 'express';
+import { ENUM_USER_ROLE } from '../../../enums/user';
+import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
 import { UserController } from './user.controller';
 import { userValidation } from './user.validation';
@@ -36,7 +38,11 @@ userRoute.delete(
 );
 
 //  profile
-profileRoute.get('/:id', UserController.getProfileFormDB);
+profileRoute.get(
+  '',
+  auth(ENUM_USER_ROLE.CUSTOMER),
+  UserController.getProfileFormDB
+);
 
 export const UserRoutes = {
   authRoute,

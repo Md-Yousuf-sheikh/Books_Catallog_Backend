@@ -1,17 +1,8 @@
-/*
-  Warnings:
-
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
 -- CreateEnum
-CREATE TYPE "UserRole" AS ENUM ('CUSTOMER', 'ADMIN');
+CREATE TYPE "UserRole" AS ENUM ('customer', 'admin');
 
 -- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('SUCCESS', 'PENDING', 'CANCEL');
-
--- DropTable
-DROP TABLE "User";
+CREATE TYPE "OrderStatus" AS ENUM ('success', 'pending', 'cancle');
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -19,7 +10,7 @@ CREATE TABLE "users" (
     "name" TEXT,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "role" "UserRole" NOT NULL DEFAULT 'CUSTOMER',
+    "role" "UserRole" NOT NULL DEFAULT 'customer',
     "contactNo" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "profileImg" TEXT NOT NULL,
@@ -38,7 +29,7 @@ CREATE TABLE "categorys" (
 );
 
 -- CreateTable
-CREATE TABLE "Book" (
+CREATE TABLE "books" (
     "id" UUID NOT NULL,
     "title" TEXT NOT NULL,
     "author" TEXT NOT NULL,
@@ -47,7 +38,7 @@ CREATE TABLE "Book" (
     "publicationDate" TEXT NOT NULL,
     "categoryId" UUID NOT NULL,
 
-    CONSTRAINT "Book_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "books_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -57,6 +48,8 @@ CREATE TABLE "reviews" (
     "rating" INTEGER NOT NULL,
     "userId" UUID NOT NULL,
     "bookId" UUID NOT NULL,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(6) NOT NULL,
 
     CONSTRAINT "reviews_pkey" PRIMARY KEY ("id")
 );
@@ -66,7 +59,7 @@ CREATE TABLE "orders" (
     "id" UUID NOT NULL,
     "userId" UUID NOT NULL,
     "orderedBooks" JSONB[],
-    "status" "OrderStatus" NOT NULL DEFAULT 'PENDING',
+    "status" "OrderStatus" NOT NULL DEFAULT 'pending',
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(6) NOT NULL,
 
@@ -77,13 +70,13 @@ CREATE TABLE "orders" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- AddForeignKey
-ALTER TABLE "Book" ADD CONSTRAINT "Book_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "categorys"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "books" ADD CONSTRAINT "books_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "categorys"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "reviews" ADD CONSTRAINT "reviews_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "reviews" ADD CONSTRAINT "reviews_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "Book"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "reviews" ADD CONSTRAINT "reviews_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "books"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "orders" ADD CONSTRAINT "orders_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

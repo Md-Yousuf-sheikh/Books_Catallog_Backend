@@ -14,6 +14,9 @@ const handleClientError = (error: PrismaClientKnownRequestError) => {
       message = 'Delete failed!';
       errors = [{ path: '', message }];
     }
+  } else if (error?.code === 'P2023') {
+    message = 'Record not found!';
+    errors = [{ path: '', message }];
   }
   return {
     statusCode,

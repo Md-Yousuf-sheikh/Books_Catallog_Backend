@@ -68,7 +68,9 @@ const deleteUserByIdFormDB = catchAsync(async (req: Request, res: Response) => {
 
 // profile
 const getProfileFormDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await UserService.getProfileFormDB(req?.params?.id);
+  const user = req.user;
+
+  const result = await UserService.getProfileFormDB(user?.id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -85,5 +87,5 @@ export const UserController = {
   getUserByIdFormDB,
   deleteUserByIdFormDB,
   updateUserByIdFormDB,
-  getProfileFormDB
+  getProfileFormDB,
 };
