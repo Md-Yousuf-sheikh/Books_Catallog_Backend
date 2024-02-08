@@ -77,6 +77,17 @@ const loginUserWithDB = async (props: User) => {
     refreshToken: refreshToken,
   };
 };
+// user
+const getUsersFormDB = async () => {
+  const res = await prisma.user.findMany({
+    where: {
+      role: 'CUSTOMER'
+    },
+    select: UserSelect,
+  });
+
+  return res;
+};
 const getUserByIdFormDB = async (id: string) => {
   const res = await prisma.user.findUnique({
     where: {
@@ -107,6 +118,7 @@ const updateUserByIdFormDB = async (
   });
   return res;
 };
+// profile
 const getProfileFormDB = async (id: string) => {
   const res = await prisma.user.findUnique({
     where: {
@@ -117,6 +129,7 @@ const getProfileFormDB = async (id: string) => {
 
   return res;
 };
+
 export const UserService = {
   loginUserWithDB,
   createUserIntoDB,
@@ -124,4 +137,5 @@ export const UserService = {
   deleteUserByIdFormDB,
   updateUserByIdFormDB,
   getProfileFormDB,
+  getUsersFormDB
 };
