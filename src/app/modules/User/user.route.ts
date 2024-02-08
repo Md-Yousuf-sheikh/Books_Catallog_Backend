@@ -18,13 +18,8 @@ authRoute.post(
 );
 
 //  users
-
-userRoute.post(
-  '/',
-  validateRequest(userValidation.loginUser),
-  UserController.loginUserWithDB
-);
-userRoute.post(
+userRoute.get('', UserController.getUsersFormDB);
+userRoute.get(
   '/:id',
   validateRequest(userValidation.loginUser),
   UserController.loginUserWithDB

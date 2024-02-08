@@ -27,8 +27,18 @@ const loginUserWithDB = catchAsync(async (req: Request, res: Response) => {
 
 //  Users
 
+const getUsersFormDB = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.getUsersFormDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get users successfully!',
+    data: result,
+  });
+});
 
 export const UserController = {
   createUserIntoDB,
-  loginUserWithDB
+  loginUserWithDB,
+  getUsersFormDB
 };
