@@ -1,16 +1,13 @@
  
   export const BookSearchAbleFiled = [
     'title',
-    'code',
-    'startMonth',
-    'endMonth',
+    // 'author',
+    // 'genre',
   ];
   export const BookFilterAbleFiled = [
     'searchTerm',
-    'title',
-    'code',
-    'startMonth',
-    'endMonth',
   ];
   
-  
+  // 'minPrice',
+  // 'maxPrice',
+  // 'category',

@@ -8,7 +8,10 @@ import { CategoryService } from './category.service';
 
 // create
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
+  console.log('req?.body',req?.body);
+  
   const result = await CategoryService.insertIntoDB(req?.body);
+
   sendResponse<Category>(res, {
     statusCode: httpStatus.OK,
     success: true,

@@ -59,6 +59,8 @@ model Book {
   category        Category @relation(fields: [categoryId], references: [id])
   reviews         Review[]
 
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt @db.Timestamp(6)
   @@map("books")
 }
 

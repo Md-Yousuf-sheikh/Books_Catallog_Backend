@@ -37,6 +37,8 @@ CREATE TABLE "books" (
     "genre" TEXT NOT NULL,
     "publicationDate" TEXT NOT NULL,
     "categoryId" UUID NOT NULL,
+    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(6) NOT NULL,
 
     CONSTRAINT "books_pkey" PRIMARY KEY ("id")
 );
