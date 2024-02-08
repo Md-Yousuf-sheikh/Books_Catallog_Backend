@@ -1,21 +1,41 @@
 import { z } from 'zod';
 
-const createUser = z.object({
+const registerUser = z.object({
   body: z.object({
-    mobile: z.string({
-      required_error: 'Mobile number is required',
+    name: z.string({
+      required_error: 'Name is required',
     }),
+    email: z
+      .string({
+        required_error: 'Email is required',
+      })
+      .email({
+        message: 'Invalid email format',
+      }),
     password: z.string({
       required_error: 'Password is required',
+    }),
+    contactNo: z.string({
+      required_error: 'Contact number is required',
+    }),
+    address: z.string({
+      required_error: 'Address is required',
+    }),
+    profileImg: z.string({
+      required_error: 'Profile image is required',
     }),
   }),
 });
 
 const loginUser = z.object({
   body: z.object({
-    mobile: z.string({
-      required_error: 'Mobile number is required',
-    }),
+    email: z
+      .string({
+        required_error: 'Email is required',
+      })
+      .email({
+        message: 'Invalid email format',
+      }),
     password: z.string({
       required_error: 'Password is required',
     }),
@@ -24,5 +44,5 @@ const loginUser = z.object({
 
 export const userValidation = {
   loginUser,
-  createUser,
+  registerUser,
 };

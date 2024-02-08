@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/mdyousufsheikh/Documents/Projects/PL2/booksCollectionServer/logs/winston/errors/.eb99c7dec5cd67fd7f3c2427da75b39c73d2021c-audit.json",
+    "files": [
+        {
+            "date": 1707348705350,
+            "name": "/Users/mdyousufsheikh/Documents/Projects/PL2/booksCollectionServer/logs/winston/errors/books-2024-08-02-05-error.log",
+            "hash": "651c03dca3ca2ad7a6ad4b4a05f209f8de040cddfc668e3fe703d7ba029bee3c"
+        },
+        {
+            "date": 1707378042663,
+            "name": "/Users/mdyousufsheikh/Documents/Projects/PL2/booksCollectionServer/logs/winston/errors/books-2024-08-02-13-error.log",
+            "hash": "3de9567677d6b7f174e2fd90a75e613d007d1889eae1e44815ebd180e756a085"
+        },
+        {
+            "date": 1707379380731,
+            "name": "/Users/mdyousufsheikh/Documents/Projects/PL2/booksCollectionServer/logs/winston/errors/books-2024-08-02-14-error.log",
+            "hash": "7b872a60308bf244b206d77a85ae5f365e0ae60cdf276c2bb16718f7b9c165db"
+        },
+        {
+            "date": 1707382801167,
+            "name": "/Users/mdyousufsheikh/Documents/Projects/PL2/booksCollectionServer/logs/winston/errors/books-2024-08-02-15-error.log",
+            "hash": "a6f271d51d3b398b4010379687cef7151cbe63cc549c46dfd723b4c420910e1f"
+        }
+    ],
+    "hashType": "sha256"
+}
