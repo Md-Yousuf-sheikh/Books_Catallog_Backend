@@ -1,3 +1,5 @@
-export type IAcademicSemesterFilterRequest = {
-  searchTerm?: string;
+
+export type orderInsertPropsType = {
+  userId: string;
+  orderedBooks: [];
 };

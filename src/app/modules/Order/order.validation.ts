@@ -1,16 +1,21 @@
 import { z } from 'zod';
 
-const loginUser = z.object({
+const create = z.object({
   body: z.object({
-    mobile: z.string({
-      required_error: 'Mobile number is required',
-    }),
-    password: z.string({
-      required_error: 'Password is required',
-    }),
+    orderedBooks: z.array(
+      z.object({
+        bookId: z.string({
+          required_error: 'Book ID is required',
+        }),
+        quantity: z.number({
+          required_error: 'Quantity is required',
+        }),
+      })
+    ),
   }),
 });
 
+
 export const orderValidation = {
-  loginUser
+  create
 };
