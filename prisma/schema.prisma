@@ -10,6 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+// const pool = new Pool({
+//   connectionString: process.env.POSTGRES_URL ,
+// })
 // Define Role Enum
 enum UserRole {
   customer
