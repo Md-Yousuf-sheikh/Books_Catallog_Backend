@@ -1,6 +1,3 @@
- 
-    export type IAuthFilterRequest = {
-      searchTerm?: string;
-    };
-    
-  
+export type IAuthFilterRequest = {
+  searchTerm?: string;
+};
