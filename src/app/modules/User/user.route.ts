@@ -20,19 +20,24 @@ authRoute.post(
 );
 
 //  users
-userRoute.get('', UserController.getUsersFormDB);
+userRoute.get('',
+auth(ENUM_USER_ROLE.ADMIN),
+UserController.getUsersFormDB);
 userRoute.get(
   '/:id',
+  auth(ENUM_USER_ROLE.ADMIN),
   validateRequest(userValidation.paramsId),
   UserController.getUserByIdFormDB
 );
 userRoute.patch(
   '/:id',
+  auth(ENUM_USER_ROLE.ADMIN),
   validateRequest(userValidation.paramsId),
   UserController.updateUserByIdFormDB
 );
 userRoute.delete(
   '/:id',
+  auth(ENUM_USER_ROLE.ADMIN),
   validateRequest(userValidation.paramsId),
   UserController.deleteUserByIdFormDB
 );
@@ -40,7 +45,7 @@ userRoute.delete(
 //  profile
 profileRoute.get(
   '',
-  auth(ENUM_USER_ROLE.CUSTOMER),
+  auth(ENUM_USER_ROLE.CUSTOMER, ENUM_USER_ROLE.ADMIN),
   UserController.getProfileFormDB
 );
 
