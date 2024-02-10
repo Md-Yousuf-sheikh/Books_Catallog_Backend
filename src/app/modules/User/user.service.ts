@@ -13,15 +13,15 @@ import prisma from '../../../shared/prisma';
 import { UserSelect } from './user.constant';
 
 const createUserIntoDB = async (props: User) => {
-  const isUserExist = await prisma.user.findUnique({
-    where: {
-      email: props?.email,
-    },
-  });
-  //  check is user
-  if (isUserExist) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'This user already existed!');
-  }
+  // const isUserExist = await prisma.user.findUnique({
+  //   where: {
+  //     email: props?.email,
+  //   },
+  // });
+  // //  check is user
+  // if (isUserExist) {
+  //   throw new ApiError(httpStatus.BAD_REQUEST, 'This user already existed!');
+  // }
 
   const newPassword = await isUserPasswordConvertBcrypt(props?.password);
   // database
